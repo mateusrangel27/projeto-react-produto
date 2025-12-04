@@ -24,24 +24,23 @@ const useProduto = () => {
     divMensagem.textContent = msg;
   };
 
-  const adicionar_produto = (id, nome, valor) => {
+  // ADICIONAR PRODUTO (ID GERADO AUTOMATICAMENTE)
+  const adicionar_produto = (nome, valor) => {
     const novoProduto = {
-      id: Math.random(),
+      id: Math.random(),    // id automático
       nome: nome,
       valor: valor
     };
 
     const novaLista = [...listaProdutos, novoProduto];
     setListaProdutos(novaLista);
-
-    alert("Produto adicionado com sucesso!");
+alert("Produto adicionado com sucesso!");
   };
 
   const excluir_produto = (id) => {
     const novaLista = listaProdutos.filter((p) => p.id !== id);
     setListaProdutos(novaLista);
-
-    alert("Produto excluído com sucesso!");
+alert("Produto excluído com sucesso!");
   };
 
   const navigate = useNavigate();
@@ -51,28 +50,23 @@ const useProduto = () => {
     navigate("/produtoDetalhes", { state: produto });
   };
 
-  const alterar_produto = (produto_editado) => {
-    const novaLista = listaProdutos.map((p) => {
-      if (p.id === produto_editado.id) {
-        return produto_editado;
-      } else {
-        return p;
-      }
-    });
+const alterar_produto = (produto_editado) => {
+    const novaLista = listaProdutos.map((p) =>
+      p.id === produto_editado.id ? produto_editado : p
+    );
 
-    setListaProdutos(novaLista);
+    setListaProdutos(novaLista);
+    alert("O produto foi alterado com sucesso!");
+  };
 
-    alert("Produto alterado com sucesso!");
-  };
-
-  return {
-    listaProdutos,
-    exibirMensagem,
-    adicionar_produto,
-    excluir_produto,
-    exibir_detalhes_produto,
-    alterar_produto
-  };
+  return {
+    listaProdutos,
+    exibirMensagem,
+    adicionar_produto,
+    excluir_produto,
+    exibir_detalhes_produto,
+    alterar_produto
+  };
 };
 
 export default useProduto;
